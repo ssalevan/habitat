@@ -1,15 +1,13 @@
-.SUFFIXES: .o .c .h .run
+HEADERS = class_defs.h classNames.h
 
-SRC = slur.c classNames.h
-OBJ = slur.o
+default: slur
 
-.c.o:
-	cc -c -g $*.c
+slur.o: slur.c $(HEADERS)
+	gcc -g -c slur.c -o slur.o
 
-.c.run:
-	cc -o $* $*.c
+slur: slur.o
+	gcc -g slur.o -o slur
 
-slur.o: $(SRC)
-
-slur: $(OBJ) classNames.h
-	cc -g $(OBJ) -o slur
+clean:
+	-rm -f slur.o
+	-rm -f slur
